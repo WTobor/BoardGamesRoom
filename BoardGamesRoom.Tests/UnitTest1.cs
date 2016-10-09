@@ -9,6 +9,7 @@ namespace BoardGamesRoom.Tests
         [TestMethod]
         public void TestMethod1()
         {
+            var a = 1;
         }
     }
 }
