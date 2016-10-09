@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Lista planszówek</title>
+</head>
+<body>
+    <div>
+        <h2>Wszystkie planszówki</h2>
+        <ul id="boardGames" />
+    </div>
+    <div>
+        <h2>Szukaj według ID</h2>
+        <input type="text" id="boardGameID" size="5" />
+        <input type="button" value="Search" onclick="find();" />
+        <p id="boardGame" />
+    </div>
+
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="/Scripts/linq.min.js"></script>
+    <script src="/Scripts/common.js"></script>
+    <script>
+        var uri = 'api/boardGames';
+
+        $(document).ready(function () {
+            // Send an AJAX request
+            $.getJSON(uri)
+                .done(function (data) {
+                    // On success, 'data' contains a list of boardGames.
+                    $.each(data, function (key, item) {
+                        // Add a list item for the boardGame.
+                        $('<li>', { text: item.Name }).appendTo($('#boardGames'));
+                        $('<ul>', { text: formatItem(item) }).appendTo($('#boardGames'));
+                    });
+                });
+        });
+
+        function formatItem(item) {
+            return String.format('Liczba graczy: {0}, Kategorie: {1}', item.NumberOfPlayers, Enumerable.From(item.Categories).Select(function (x) { return " " + x.Name }).ToArray());
+        }
+
+        function find() {
+            var id = $('#boardGameID').val();
+            $.getJSON(uri + '/' + id)
+                .done(function (data) {
+                    $('#boardGame').text(data.Name + " " + formatItem(data));
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#boardGame').text('Error: ' + err);
+                });
+        }
+    </script>
+
+</body>
+</html>
