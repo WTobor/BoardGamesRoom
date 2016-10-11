@@ -91,7 +91,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BoardGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +106,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BoardGamesRoom.Lib\BoardGamesRoom.Lib.csproj">
+      <Project>{02675abd-fb02-4bf3-8168-35e61eba944d}</Project>
+      <Name>BoardGamesRoom.Lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BoardGamesRoom.Model\BoardGamesRoom.Model.csproj">
+      <Project>{438edc5a-b8ef-4bda-9a09-25c37813dd3d}</Project>
+      <Name>BoardGamesRoom.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

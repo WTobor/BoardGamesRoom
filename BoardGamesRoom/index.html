@@ -22,12 +22,9 @@
         var uri = 'api/boardGames';
 
         $(document).ready(function () {
-            // Send an AJAX request
             $.getJSON(uri)
                 .done(function (data) {
-                    // On success, 'data' contains a list of boardGames.
                     $.each(data, function (key, item) {
-                        // Add a list item for the boardGame.
                         $('<li>', { text: item.Name }).appendTo($('#boardGames'));
                         $('<ul>', { text: formatItem(item) }).appendTo($('#boardGames'));
                     });
@@ -35,7 +32,16 @@
         });
 
         function formatItem(item) {
-            return String.format('Liczba graczy: {0}, Kategorie: {1}', item.NumberOfPlayers, Enumerable.From(item.Categories).Select(function (x) { return " " + x.Name }).ToArray());
+            return String.format('Liczba graczy: {0}-{1}, Kategorie: {2}', item.MinNumberOfPlayers, item.MaxNumberOfPlayers, formatCategories(item.Categories));
+        }
+
+        function formatCategories(categories) {
+            var result = new Array(categories.lenght);
+            for(var i = 0; i < categories.length; i++)
+            {
+                result[i] = categories[i].Name;
+            }
+            return result.join(", ");
         }
 
         function find() {
