@@ -17,9 +17,9 @@ namespace BoardGamesRoom.Lib
             return db.BoardGames.Include(x => x.Categories).ToArray();
         }
 
-        public BoardGame GetBoardGameByID(int ID)
+        public BoardGame GetBoardGameByName(string Name)
         {
-            return db.BoardGames.Include(x => x.Categories).Where(x => x.ID == ID).FirstOrDefault();
+            return db.BoardGames.Include(x => x.Categories).Where(x => x.Name.ToLower() == Name.ToLower()).FirstOrDefault();
         }
 
         public void DeleteBoardGameByID(int ID)

@@ -28,6 +28,7 @@ namespace BoardGamesRoom.Lib
                 });
         }
 
+        public DbSet<User> Users { get; set; }
         public DbSet<BoardGame> BoardGames { get; set; }
         public DbSet<BoardGameCategory> BoardGameCategories { get; set; }
     }

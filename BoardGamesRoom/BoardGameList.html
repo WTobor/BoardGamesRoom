@@ -5,14 +5,14 @@
 </head>
 <body>
     <div>
-        <h2>Wszystkie planszówki</h2>
-        <ul id="boardGames" />
-    </div>
-    <div>
-        <h2>Szukaj według ID</h2>
-        <input type="text" id="boardGameID" size="5" />
+        <h2>Szukaj według nazwy</h2>
+        <input type="text" id="boardGameName" size="5" />
         <input type="button" value="Search" onclick="find();" />
         <p id="boardGame" />
+    </div>
+	<div>
+        <h2>Wszystkie planszówki</h2>
+        <ul id="boardGames" />
     </div>
 
     <script src="/Scripts/jquery-3.1.1.min.js"></script>
@@ -45,7 +45,7 @@
         }
 
         function find() {
-            var id = $('#boardGameID').val();
+            var id = $('#boardGameName').val();
             $.getJSON(uri + '/' + id)
                 .done(function (data) {
                     $('#boardGame').text(data.Name + " " + formatItem(data));

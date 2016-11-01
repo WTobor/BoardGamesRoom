@@ -23,7 +23,7 @@ namespace BoardGamesRoom.Controllers
 
         public IHttpActionResult Get(int id)
         {
-            BoardGame boardGame = boardGameDS.GetBoardGameByID(id);
+            BoardGame boardGame = boardGameDS.GetBoardGameByName(id);
             if (boardGame == null)
             {
                 return NotFound();
