@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Lista planszówek</title>
+</head>
+<body>
+	<div>
+		<h2>Szukaj według nazwy</h2>
+		<input type="text" id="boardGameName" size="5" />
+		<input type="button" value="Search" onclick="find();" />
+		<p id="boardGame" />
+	</div>
+	<div>
+		<h2>Gry planszowe</h2>
+		<ul id="boardGameList" />
+	</div>
+
+	<script src="/Scripts/jquery-3.1.1.min.js"></script>
+	<script src="/Scripts/linq.min.js"></script>
+	<script src="/Scripts/common.js"></script>
+	<script>
+		var uri = 'api/boardGames';
+
+		$(document).ready(function () {
+			$.getJSON(uri)
+				.done(function (data) {
+					$.each(data, function (key, item) {
+						$('<li>', { text: item.Name }).appendTo($('#boardGameList'));
+						$('<ul>', { text: formatItem(item) }).appendTo($('#boardGameList'));
+					});
+				});
+		});
+
+		function formatItem(item) {
+			return String.format('Liczba graczy: {0}-{1}, Kategorie: {2}', item.MinNumberOfPlayers, item.MaxNumberOfPlayers, formatCategories(item.Categories));
+		}
+
+		function formatCategories(categories) {
+			var result = new Array(categories.lenght);
+			for(var i = 0; i < categories.length; i++)
+			{
+				result[i] = categories[i].Name;
+			}
+			return result.join(", ");
+		}
+
+		function find() {
+			var id = $('#boardGameName').val();
+			$.getJSON(uri + '/' + id)
+				.done(function (data) {
+					$('#boardGameList').text(data.Name + " " + formatItem(data));
+				})
+				.fail(function (jqXHR, textStatus, err) {
+					$('#boardGameList').text('Error: ' + err);
+				});
+		}
+	</script>
+
+</body>
+</html>

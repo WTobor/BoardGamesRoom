@@ -21,7 +21,7 @@ namespace BoardGamesRoom.Controllers
             return games;
         }
 
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult Get(string id)
         {
             BoardGame boardGame = boardGameDS.GetBoardGameByName(id);
             if (boardGame == null)

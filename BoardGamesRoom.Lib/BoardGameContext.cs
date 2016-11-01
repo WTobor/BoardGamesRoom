@@ -11,6 +11,7 @@ namespace BoardGamesRoom.Lib
     {    
         public BoardGameContext() : base("name=BoardGameContext")
         {
+            Database.SetInitializer<BoardGameContext>(null);
             base.Configuration.ProxyCreationEnabled = false;
         }
 
@@ -25,6 +26,17 @@ namespace BoardGamesRoom.Lib
                     cb.MapLeftKey("BoardGameID");
                     cb.MapRightKey("BoardGameCategoryID");
                     cb.ToTable("BoardGame_BoardGameCategory");
+                });
+
+            //many-to-many 
+            modelBuilder.Entity<User>()
+                .HasMany<BoardGame>(b => b.Games)
+                .WithMany(u => u.Users)
+                .Map(bu =>
+                {
+                    bu.MapLeftKey("UserID");
+                    bu.MapRightKey("BoardGameID");
+                    bu.ToTable("User_BoardGame");
                 });
         }
 

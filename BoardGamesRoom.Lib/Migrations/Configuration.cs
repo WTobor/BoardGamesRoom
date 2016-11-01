@@ -1,13 +1,12 @@
-namespace BoardGamesRoom.Lib.Migrations
+ï»¿namespace BoardGamesRoom.Lib.Migrations
 {
+    using Model;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using BoardGamesRoom.Model;
-    using System.Collections.Generic;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<BoardGameContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<BoardGamesRoom.Lib.BoardGameContext>
     {
         public Configuration()
         {
@@ -25,22 +24,21 @@ namespace BoardGamesRoom.Lib.Migrations
                 new BoardGameCategory() { ID = 6, Name = "Przygodowe" },
                 new BoardGameCategory() { ID = 7, Name = "Kooperacyjne" },
                 new BoardGameCategory() { ID = 8, Name = "Gry karciane" },
-                new BoardGameCategory() { ID = 9, Name = "Gry koœciane" },
+                new BoardGameCategory() { ID = 9, Name = "Gry koÅ“ciane" },
                 new BoardGameCategory() { ID = 10, Name = "Logiczne" },
-                new BoardGameCategory() { ID = 11, Name = "Wyœcigowe i sportowe" },
+                new BoardGameCategory() { ID = 11, Name = "WyÅ“cigowe i sportowe" },
                 new BoardGameCategory() { ID = 12, Name = "Gry dla 1 osoby" },
-                new BoardGameCategory() { ID = 13, Name = "Gry dla 2 osób" },
-                new BoardGameCategory() { ID = 14, Name = "Gry podró¿ne" },
+                new BoardGameCategory() { ID = 13, Name = "Gry dla 2 osÃ³b" },
+                new BoardGameCategory() { ID = 14, Name = "Gry podrÃ³Â¿ne" },
                 new BoardGameCategory() { ID = 15, Name = "Gry plenerowe" },
-                new BoardGameCategory() { ID = 16, Name = "S³owne i liczbowe" },
-                new BoardGameCategory() { ID = 17, Name = "Ró¿ne" },
-                new BoardGameCategory() { ID = 18, Name = "Ze zwierzêtami" },
-                new BoardGameCategory() { ID = 19, Name = "Gry japoñskie" },
-                new BoardGameCategory() { ID = 20, Name = "Gry dla doros³ych" },
+                new BoardGameCategory() { ID = 16, Name = "SÂ³owne i liczbowe" },
+                new BoardGameCategory() { ID = 17, Name = "RÃ³Â¿ne" },
+                new BoardGameCategory() { ID = 18, Name = "Ze zwierzÃªtami" },
+                new BoardGameCategory() { ID = 19, Name = "Gry japoÃ±skie" },
+                new BoardGameCategory() { ID = 20, Name = "Gry dla dorosÂ³ych" },
                 new BoardGameCategory() { ID = 21, Name = "Edukacyjne" },
                 new BoardGameCategory() { ID = 22, Name = "Dodatki do gier" }
                 );
-
             context.SaveChanges();
 
             var osadnicyCat = context.BoardGameCategories.Where(x => x.ID == 3 || x.ID == 4).ToList();
@@ -50,9 +48,17 @@ namespace BoardGamesRoom.Lib.Migrations
             context.BoardGames.AddOrUpdate(x => x.ID,
                 new BoardGame() { ID = 1, Name = "Osadnicy z Catanu", Categories = osadnicyCat, MinNumberOfPlayers = 2, MaxNumberOfPlayers = 4 },
                 new BoardGame() { ID = 2, Name = "Splendor", Categories = splendorCat, MinNumberOfPlayers = 2, MaxNumberOfPlayers = 4 },
-                new BoardGame() { ID = 3, Name = "Sabota¿ysta", Categories = sabotazCat, MinNumberOfPlayers = 2, MaxNumberOfPlayers = 6 }
+                new BoardGame() { ID = 3, Name = "SabotaÂ¿ysta", Categories = sabotazCat, MinNumberOfPlayers = 2, MaxNumberOfPlayers = 6 }
                 );
+            context.SaveChanges();
 
+            var werciaGames = context.BoardGames.Where(x => x.ID == 1 || x.ID == 2).ToList();
+            var lukaszGames = context.BoardGames.Where(x => x.ID == 3).ToList();
+
+            context.Users.AddOrUpdate(x => x.ID,
+                new User() { ID = 1, Login = "wercia", Password = "wercia", Games = werciaGames }, 
+                new User() { ID = 2, Login = "lukasz", Password = "lukasz", Games = lukaszGames }
+                );
             context.SaveChanges();
         }
     }
