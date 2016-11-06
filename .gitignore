@@ -188,4 +188,6 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 
+BoardGamesRoom/Web.config
 BoardGamesRoom/Web.Debug.config
+BoardGamesRoom/Web.Release.config
