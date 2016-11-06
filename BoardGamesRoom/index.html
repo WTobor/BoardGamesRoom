@@ -1,74 +1,33 @@
 ﻿<!DOCTYPE html>
-<meta charset="utf-8">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-	<title>BoardGamesRoom</title>
+    <title>BOARD GAMES ROOM</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<div>
-		<table>
-			<tr>
-				<td><button onclick="GetAllBoardGames();return false;">Gry planszowe</button></td>
-				<td><button onclick="GetAllUsers();return false;">Użytkownicy</button></td>
-			</tr>
-		</table>
-	</div>
+    <div class="jumbotron text-center">
+        <h1>Welcome in Board Games Room</h1>
 
-	<h3>Oputput:</h3>
-	<div id="divResult"></div>
-
-	<script src="/Scripts/jquery-3.1.1.min.js"></script>
-	<script src="/Scripts/linq.min.js"></script>
-	<script src="/Scripts/common.js"></script>
-	<script>
-		function GetAllBoardGames() {
-			jQuery.support.cors = true;
-			$.ajax({
-				url: 'api/boardGames',
-				type: 'GET',
-				dataType: 'json',
-				success: function (data) {
-					WriteResponseBG(data);
-				},
-				error: function (x, y, z) {
-					alert(x + '\n' + y + '\n' + z);
-				}
-			});
-		}
-
-		function WriteResponseBG(boardGames) {
-			var strResult = "<table><th>Nazwa gry</th>";
-			$.each(boardGames, function (index, boardGame) {
-				strResult += "<tr><td>" + boardGame.Name + "</td></tr>";
-			});
-			strResult += "</table>";
-			$("#divResult").html(strResult);
-		}
-
-		function GetAllUsers() {
-			jQuery.support.cors = true;
-			$.ajax({
-				url: 'api/users',
-				type: 'GET',
-				dataType: 'json',
-				success: function (data) {
-					WriteResponseU(data);
-				},
-				error: function (x, y, z) {
-					alert(x + '\n' + y + '\n' + z);
-				}
-			});
-		}
-
-		function WriteResponseU(users) {
-			var strResult = "<table><th>Nazwa użytkownika</th>";
-			$.each(users, function (index, user) {
-				strResult += "<tr><td>" + user.Login + "</td></tr>";
-			});
-			strResult += "</table>";
-			$("#divResult").html(strResult);
-		}
-	</script>
-
+        <div id="menu" class="btn-group btn-group-justified">
+            <div class="btn-group">
+                <button class="btn-default" onclick="GetAllBoardGames();return false;">Gry planszowe</button>
+                <button class="btn-default" onclick="GetAllUsers();return false;">Użytkownicy</button>
+            </div>
+        </div>
+    </div>
+    <div id="divBody"></div>
+        
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="/Scripts/linq.min.js"></script>
+    <script src="/Scripts/common.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="ViewScripts/BoardGames.js"></script>
+    <script type="text/javascript" src="ViewScripts/Users.js"></script>
+    <script>
+    </script>
+    
 </body>
 </html>
