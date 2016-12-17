@@ -18,5 +18,6 @@ namespace BoardGamesRoom.Model
 
         public virtual ICollection<BoardGameCategory> Categories { get; set; }
         public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Play> Plays { get; set; }
     }    
 }

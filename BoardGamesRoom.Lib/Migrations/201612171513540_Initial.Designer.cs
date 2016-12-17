@@ -13,7 +13,7 @@ namespace BoardGamesRoom.Lib.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201611011424202_Initial"; }
+            get { return "201612171513540_Initial"; }
         }
         
         string IMigrationMetadata.Source

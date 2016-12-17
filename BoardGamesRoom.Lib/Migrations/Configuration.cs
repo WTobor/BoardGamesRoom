@@ -60,6 +60,27 @@
                 new User() { ID = 2, Login = "lukasz", Password = "lukasz", Games = lukaszGames }
                 );
             context.SaveChanges();
+
+            context.Player.AddOrUpdate(x => x.ID,
+                new Player() { ID = 1, UserID=1, Points=90, Ranking=1 },
+                new Player() { ID = 2, UserID = 2, Points = 70, Ranking = 2 }
+                );
+            context.SaveChanges();
+
+            var players = context.Player.Where(x => x.ID == 1 || x.ID == 2).ToList();
+            var boardGame = context.BoardGames.Where(x => x.ID == 1 ).FirstOrDefault();
+
+            context.Play.AddOrUpdate(x => x.ID,
+                new Play() { ID = 1, Date = DateTimeOffset.Now, Players = players, BoardGameID = 1, BoardGame = boardGame, Winner="werka zwycięzca" }
+                );
+            context.SaveChanges();
+
+            var plays = context.Play.ToList();
+
+            context.Statistics.AddOrUpdate(x => x.ID,
+                new Statistic() { ID = 1, Plays = plays }
+                );
+            context.SaveChanges();
         }
     }
 }
